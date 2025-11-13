@@ -53,12 +53,12 @@
     <nav>
         <div class="container">
             <ul class="main-nav">
-                <li><a href="index.jsp" class="active">Home</a></li>
+                <li><a href="index.jsp" >Home</a></li>
                 <li><a href="#">Notices</a></li>
                 <li><a href="about.html">About Us</a></li>
                 <li><a href="#">Departments</a></li>
                 <li><a href="#">Patient Care</a></li>
-                <li><a href="patientregister.jsp">Appointments</a></li>
+                <li><a href="patientregister.jsp" class="active">Appointments</a></li>
                 <li><a href="contact.html"> Contact us</a></li>
                 
             </ul>
@@ -105,26 +105,26 @@
                     </div>
                     
                     <!-- Form with POST method for Servlet -->
-                    <form class="registration-form" id="patient-registration-form" action="PatientRegistrationServlet" method="POST">
+                    <form class="registration-form" id="patient-registration-form" action="PatientRegisterServlet" >
                         <div class="form-group required">
                             <label for="name">Full Name</label>
-                            <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                            <input type="text" id="name" name="patient_name" required placeholder="Enter your full name">
                         </div>
                         
                         <div class="form-group required">
                             <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" name="phone" required placeholder="10-digit phone number" pattern="[0-9]{10}" title="Please enter a 10-digit phone number">
+                            <input type="tel" id="phone" name="patient_number" required placeholder="10-digit phone number" pattern="[0-9]{10}" title="Please enter a 10-digit phone number">
                         </div>
                         
                         <div class="form-group required">
                             <label for="password">Password</label>
-                            <input type="password" id="password" name="password" required placeholder="At least 8 characters" minlength="8" title="Password must be at least 8 characters">
+                            <input type="password" id="password" name="patient_password" required placeholder="At least 8 characters" minlength="8" title="Password must be at least 8 characters">
                         </div>
                         
-                        <div class="form-group required">
-                            <label for="confirm-password">Confirm Password</label>
-                            <input type="password" id="confirm-password" name="confirmPassword" required placeholder="Re-enter your password">
-                        </div>
+<!--                         <div class="form-group required"> -->
+<!--                             <label for="confirm-password">Confirm Password</label> -->
+<!--                             <input type="text" id="confirm-password" name="patient_password" required placeholder="Re-enter your password"> -->
+<!--                         </div> -->
                         
                         <div class="form-actions">
                             <button type="reset" class="btn btn-secondary">Reset Form</button>

@@ -52,12 +52,12 @@
     <nav>
         <div class="container">
             <ul class="main-nav">
-                <li><a href="index.jsp" class="active">Home</a></li>
+                <li><a href="index.jsp" >Home</a></li>
                 <li><a href="#">Notices</a></li>
                 <li><a href="about.html">About Us</a></li>
                 <li><a href="#">Departments</a></li>
                 <li><a href="#">Patient Care</a></li>
-                <li><a href="patientregister.jsp">Appointments</a></li>
+                <li><a href="patientlogin.jsp"class="active">Appointments</a></li>
                 <li><a href="contact.html"> Contact us</a></li>
                 
             </ul>
@@ -93,15 +93,15 @@
                     </div>
                     
                     <!-- Form with POST method for Servlet -->
-                    <form class="login-form" id="patient-login-form" action="PatientLoginServlet" method="POST">
+                    <form class="login-form" id="patient-login-form" action="PatientLoginServlet">
                         <div class="form-group required">
                             <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" name="phone" required placeholder="10-digit phone number" pattern="[0-9]{10}" title="Please enter your 10-digit phone number">
+                            <input type="tel" id="phone" name="patient_number" required placeholder="10-digit phone number" pattern="[0-9]{10}" title="Please enter your 10-digit phone number">
                         </div>
                         
                         <div class="form-group required">
                             <label for="password">Password</label>
-                            <input type="password" id="password" name="password" required placeholder="Enter your password">
+                            <input type="password" id="password" name="patient_password" required placeholder="Enter your password">
                         </div>
                         
                         <div class="form-options">
@@ -116,15 +116,15 @@
                     </form>
                     
                     <div class="register-link">
-                        <p>Don't have an account? <a href="register.html">Register here</a></p>
+                        <p>Don't have an account? <a href="patientregister.jsp">Register here</a></p>
                     </div>
                     
                     <div class="quick-options">
-                        <a href="emergency.html" class="quick-option">
+                        <a href="tel:+918119934105" class="quick-option">
                             <i class="fas fa-ambulance"></i>
                             <span>Emergency Services</span>
                         </a>
-                        <a href="contact.html" class="quick-option">
+                        <a href="tel:+918119934105" class="quick-option">
                             <i class="fas fa-phone-alt"></i>
                             <span>Contact Support</span>
                         </a>

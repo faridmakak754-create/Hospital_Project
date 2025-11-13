@@ -40,7 +40,7 @@
         <div class="search-section">
             <div class="search-container">
                 <form class="search-form" action="#" method="GET">
-                    <input type="text" class="search-input" name="query" 
+                    <input type="text" class="search-input" name="search" 
                            placeholder="Search for doctors, departments, services..." 
                            aria-label="Search">
                     <button type="submit" class="search-button">
