@@ -1,88 +1,64 @@
 package p1;
 
-import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.ServletException;
+import java.io.*;
+import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.*;
+import java.sql.*;
 
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+@WebServlet("/patientLogin")
+public class PatientLoginServlet extends HttpServlet 
+{
 
-/**
- * Servlet implementation class PatientLoginServlet
- */
-@WebServlet("/PatientLoginServlet")
-public class PatientLoginServlet extends HttpServlet {
-	
-		String patient_number=null;
-		String patient_password=null;
-	
-		String url = "jdbc:mysql://localhost:3306/farid_hospital";
-	    String dbUsername = "root";
-	    String dbPassword = "system";
+    private static final String url = "jdbc:mysql://localhost:3306/farid_hospital";
+    private static final String USER = "root";
+    private static final String PASS = "system";
 
-	    Connection con = null;
-	    PreparedStatement pstmt = null;
-	    ResultSet res = null;
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException 
+    {
 
-	    public void init() {
-	    	try
-			{
-				Class.forName("com.mysql.cj.jdbc.Driver");
-				System.out.println("Driver load success");
-			}
-			catch(Exception e)
-			{
-				System.out.println("Driver load failed");
-			}
-			
-			//connection 
-			try
-			{
-				con=DriverManager.getConnection(url,dbUsername,dbPassword);
-				System.out.println("Connection success");
-			}
-			catch(Exception e)
-			{
-				System.out.println("Connection failed");
-			}
-		}
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
 
-	    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-	            throws ServletException, IOException {
+        String number = request.getParameter("patient_number");
+        String password = request.getParameter("patient_password");
 
-	    	patient_number=request.getParameter("patient_number");
-			patient_password=request.getParameter("patient_password");
-	        
-	        
-	       try {
-	        pstmt = con.prepareStatement("SELECT * FROM PATIENT_REGISTRATION WHERE patient_number=? AND patient_password=?");
-	        pstmt.setString(1, patient_number);
-	        pstmt.setString(2, patient_password);
-	        res = pstmt.executeQuery();
+        try 
+        {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection(url, USER, PASS);
 
-	        if (res.next()) {
-	            HttpSession session = request.getSession();
-	            session.setAttribute("patient_number", patient_number);
-	            session.setAttribute("patient_password", patient_password);
+            String sql = "SELECT * FROM patient_registration WHERE patient_number=? AND patient_password=?";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(1, number);
+            pst.setString(2, password);
 
-	            RequestDispatcher rd = request.getRequestDispatcher("patient_dashboard.jsp");
-	            rd.forward(request, response);
-	        } else {
-	            response.sendRedirect("index.jsp");
-	        }
+            ResultSet rs = pst.executeQuery();
 
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        response.getWriter().println("Login failed: " + e.getMessage());
-	    }
-	
-	}
+            if (rs.next())
+            {
+                // Login success → save patient info in session
+                HttpSession session = request.getSession();
+                session.setAttribute("patient_id", rs.getInt("patient_id"));
+                session.setAttribute("patient_name", rs.getString("patient_name"));
 
+                response.sendRedirect("patient_dashboard.jsp");
+            } 
+            else
+            {
+                out.println("<h3 style='color:red;'>Invalid Number or Password!</h3>");
+                RequestDispatcher rd = request.getRequestDispatcher("patient_login.jsp");
+                rd.include(request, response);
+            }
+
+            con.close();
+        } 
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            out.println("<h3 style='color:red;'>Error: " + e.getMessage() + "</h3>");
+        }
+    }
 }

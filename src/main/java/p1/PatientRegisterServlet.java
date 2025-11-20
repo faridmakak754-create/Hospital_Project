@@ -74,7 +74,7 @@ public class PatientRegisterServlet extends HttpServlet {
         	int row=pstmt.executeUpdate();
         	System.out.println(row);
         	System.out.println("Data insert Successfully");
-        	response.sendRedirect("patientlogin.jsp");
+        	response.sendRedirect("patient_login.jsp");
         	
         }
 		catch(Exception e)

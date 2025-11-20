@@ -84,7 +84,7 @@
                     <div class="emergency-contact">
                         <h3>Already have an account?</h3>
                         <p>Sign in to access your patient portal</p>
-                        <a href="patientlogin.jsp" class="btn btn-secondary" style="margin-top: 10px; display: inline-block;">Login Here</a>
+                        <a href="patient_login.jsp" class="btn btn-secondary" style="margin-top: 10px; display: inline-block;">Login Here</a>
                     </div>
                 </div>
                 
@@ -132,8 +132,9 @@
                         </div>
                     </form>
                     
+                    
                     <div class="login-link">
-                        <p>Already have an account? <a href="patientlogin.jsp">Sign in here</a></p>
+                        <p>Already have an account? <a href="patient_login.jsp">Sign in here</a></p>
                     </div>
                 </div>
             </div>

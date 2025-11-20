@@ -93,7 +93,7 @@
                     </div>
                     
                     <!-- Form with POST method for Servlet -->
-                    <form class="login-form" id="patient-login-form" action="PatientLoginServlet">
+                    <form class="login-form" id="patient-login-form" action="patientLogin" method="post">
                         <div class="form-group required">
                             <label for="phone">Phone Number</label>
                             <input type="tel" id="phone" name="patient_number" required placeholder="10-digit phone number" pattern="[0-9]{10}" title="Please enter your 10-digit phone number">
