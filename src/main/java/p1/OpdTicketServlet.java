@@ -36,11 +36,7 @@ public class OpdTicketServlet extends HttpServlet {
 
             int row = pst.executeUpdate();
 
-            if (row > 0) {
-                out.println("<h3 style='color:green;'>OPD Ticket Submitted Successfully!</h3>");
-            } else {
-                out.println("<h3 style='color:red;'>Failed to submit ticket.</h3>");
-            }
+           response.sendRedirect("patient_dashboard.jsp");
 
             con.close();
 
