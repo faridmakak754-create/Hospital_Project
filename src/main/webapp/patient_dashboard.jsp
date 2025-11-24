@@ -1,3 +1,4 @@
+
 <%@ page import="java.sql.*, jakarta.servlet.http.*, jakarta.servlet.*" %>
 
 <%
@@ -38,6 +39,12 @@
 </head>
 
 <body>
+    <% response.setHeader("Cache-control","no-cache,no-store,must-revalidate");
+        if(session.getAttribute("patient_id")==null)
+    {
+    response.sendRedirect("index.jsp");
+    }
+    %>
 
     <!-- Sidebar -->
     <div class="sidebar">
@@ -86,10 +93,12 @@
                     <img src="https://i.pravatar.cc/150?img=32" alt="User" class="user-avatar">
                     <span class="user-name"> <%= patientName %></span>
                 </div>
-                <a href="logout.jsp" class="logout-btn">
-                    <i class="fas fa-sign-out-alt"></i>
-                    <span>Logout</span>
-                </a>
+                 <form action="Logout" class="logout-form">
+                    <button type="submit" class="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </button>
+                </form>
             </div>
         </div>
 
@@ -168,7 +177,7 @@
    					 if (!hasTickets) {
 				   %>
    			 <tr>
-        		<td colspan="4" style="text-align:center">No OPD tickets found.</td>
+        		<td colspan="4" class="no-data">No OPD tickets found.</td>
     		</tr>
 		<%
    		 	}	

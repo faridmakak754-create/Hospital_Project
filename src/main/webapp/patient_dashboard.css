@@ -158,21 +158,30 @@
             font-weight: bold;
         }
 
+          /* logout button */
+        .logout-form {
+            margin-left: 10px;
+        }
+        
         .logout-btn {
-            background-color: #e74c3c;
+            background:orangered;
             color: white;
+            border: 0;
+            outline:none;
             padding: 8px 15px;
-            border-radius: 5px;
-            text-decoration: none;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 8px;
+            transition: all 0.3s;
         }
-
+        
         .logout-btn:hover {
-            background-color: #c0392b;
+            background:rgb(88, 24, 1);
         }
-
+        
         /* Body Content Layout */
         .body-content {
             display: flex;
@@ -390,12 +399,6 @@
             text-align: center;
             padding: 30px;
             color: #7f8c8d;
-        }
-
-        .no-data i {
-            font-size: 40px;
-            margin-bottom: 10px;
-            color: #bdc3c7;
         }
 
         /* Responsive Design */

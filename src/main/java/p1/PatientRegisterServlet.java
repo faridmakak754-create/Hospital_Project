@@ -1,88 +1,66 @@
 package p1;
 
-import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
-
+import jakarta.servlet.*;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.*;
+import java.sql.*;
 
 @WebServlet("/PatientRegisterServlet")
 public class PatientRegisterServlet extends HttpServlet {
-	
-	
-	String patient_name=null;
-	String patient_number=null;
-	String patient_password=null;
 
-	String url="jdbc:mysql://localhost:3306/farid_hospital";
-	String username="root";
-	String password="system";
-	Statement stmt=null;
-	ResultSet res=null;
-	PreparedStatement pstmt=null;
-	Connection con=null;
-	
-	public void init()
-	{
-		try
-		{
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			System.out.println("Driver load success");
-		}
-		catch(Exception e)
-		{
-			System.out.println("Driver load failed");
-		}
-		
-		//connection 
-		try
-		{
-			con=DriverManager.getConnection(url,username,password);
-			System.out.println("Connection success");
-		}
-		catch(Exception e)
-		{
-			System.out.println("Connection failed");
-		}
-	}
-	
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-	{
-		patient_name=request.getParameter("patient_name");
-		patient_number=request.getParameter("patient_number");
-		patient_password=request.getParameter("patient_password");
-		
-		try
-        {
-        	pstmt=con.prepareStatement("INSERT INTO  PATIENT_REGISTRATION (patient_name,patient_number,patient_password) VALUES(?,?,?)");
-        	
-        	pstmt.setString(1, patient_name);
-        	pstmt.setString(2, patient_number);
-        	pstmt.setString(3, patient_password);
-        	
-        	
-        	int row=pstmt.executeUpdate();
-        	System.out.println(row);
-        	System.out.println("Data insert Successfully");
-        	response.sendRedirect("patient_login.jsp");
-        	
+    private static final String URL = "jdbc:mysql://localhost:3306/farid_hospital";
+    private static final String USER = "root";
+    private static final String PASS = "system";
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        response.setContentType("text/html");
+
+        String name = request.getParameter("patient_name");
+        String number = request.getParameter("patient_number");
+        String password = request.getParameter("patient_password");
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection(URL, USER, PASS);
+
+            // 1️⃣ Check if number already exists
+            String checkSql = "SELECT patient_number FROM patient_registration WHERE patient_number = ?";
+            PreparedStatement checkPst = con.prepareStatement(checkSql);
+            checkPst.setString(1, number);
+            ResultSet rs = checkPst.executeQuery();
+
+            if (rs.next()) {
+                // Number exists → return with error message
+                request.setAttribute("error", "This number is already registered!");
+                RequestDispatcher rd = request.getRequestDispatcher("patientregister.jsp");
+                rd.forward(request, response); // IMPORTANT → forward keeps message
+                return;
+            }
+
+            // 2️⃣ Insert new patient
+            String insertSql = "INSERT INTO patient_registration (patient_name, patient_number, patient_password) VALUES (?,?,?)";
+            PreparedStatement pst = con.prepareStatement(insertSql);
+
+            pst.setString(1, name);
+            pst.setString(2, number);
+            pst.setString(3, password);
+
+            pst.executeUpdate();
+
+            con.close();
+
+            // Success → redirect to login page
+            response.sendRedirect("patient_login.jsp");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("error", "Server error! Please try again.");
+            RequestDispatcher rd = request.getRequestDispatcher("patientregister.jsp");
+            rd.forward(request, response);
         }
-		catch(Exception e)
-		{
-			System.out.println("Data insert failed");
-		}
-        
-   
-	}
-
+    }
 }

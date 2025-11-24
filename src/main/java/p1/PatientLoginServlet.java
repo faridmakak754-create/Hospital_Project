@@ -6,7 +6,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import java.sql.*;
 
-@WebServlet("/patientLogin")
+@WebServlet("/PatientLoginServlet")
 public class PatientLoginServlet extends HttpServlet 
 {
 
@@ -43,8 +43,10 @@ public class PatientLoginServlet extends HttpServlet
                 HttpSession session = request.getSession();
                 session.setAttribute("patient_id", rs.getInt("patient_id"));
                 session.setAttribute("patient_name", rs.getString("patient_name"));
+              
 
                 response.sendRedirect("patient_dashboard.jsp");
+               
             } 
             else
             {

@@ -37,6 +37,7 @@ public class OpdTicketServlet extends HttpServlet {
             int row = pst.executeUpdate();
 
            response.sendRedirect("patient_dashboard.jsp");
+        
 
             con.close();
 

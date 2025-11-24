@@ -90,10 +90,20 @@
                 
                 <div class="registration-form-container">
                     <div class="form-header">
-                        <h2>Create Account</h2>
-                        <p>Please fill in all required fields marked with *</p>
-                    </div>
-                    
+    					<h2>Create Account</h2>
+   						 <p>Please fill in all required fields marked with *</p>
+
+    						<!-- Error message display -->
+  					  <% 
+       					 String error = (String) request.getAttribute("error"); 
+      					  if (error != null) { 
+   					 %>
+       					 <p style="color: red; font-weight: bold; margin-top: 10px;">
+            				<%= error %>
+        				</p>
+   				 <% } %>
+					</div>
+
                     <div class="form-instructions">
                         <h4>Registration Instructions:</h4>
                         <ul>
@@ -105,7 +115,7 @@
                     </div>
                     
                     <!-- Form with POST method for Servlet -->
-                    <form class="registration-form" id="patient-registration-form" action="PatientRegisterServlet" >
+                    <form class="registration-form" id="patient-registration-form" action="PatientRegisterServlet" method="post">
                         <div class="form-group required">
                             <label for="name">Full Name</label>
                             <input type="text" id="name" name="patient_name" required placeholder="Enter your full name">
