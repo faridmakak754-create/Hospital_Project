@@ -8,7 +8,7 @@
     <title>Patient Registration - FIMS</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 	<link rel="stylesheet" href="patient.css">
-	<link rel="stylesheet" href="index.css">
+	<link rel="stylesheet" href="homepage.css">
 </head>
 <body>
     <!-- Header -->

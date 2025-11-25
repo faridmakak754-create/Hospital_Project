@@ -8,7 +8,7 @@
     <title>Patient Login - FIMS</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="patient.css">
-        <link rel="stylesheet" href="index.css">
+        <link rel="stylesheet" href="homepage.css">
 </head>
 <body>
     <!-- Header -->
@@ -90,6 +90,15 @@
                     <div class="form-header">
                         <h2>Patient Login</h2>
                         <p>Sign in to your account</p>
+                        		<!-- Error message display -->
+  					  <% 
+       					 String error = (String) request.getAttribute("error"); 
+      					  if (error != null) { 
+   					 %>
+       					 <p style="color: red; font-weight: bold; margin-top: 10px;">
+            				<%= error %>
+        				</p>
+   				 <% } %>
                     </div>
                     
                     <!-- Form with POST method for Servlet -->
