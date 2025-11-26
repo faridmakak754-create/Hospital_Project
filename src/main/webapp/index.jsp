@@ -10,6 +10,12 @@
     <title>FIMS -  Farid Institute Of Medical Sciences</title>
      <link rel="stylesheet" href="homepage.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+    body{
+    background-color:white;
+  
+    }
+    </style>
 </head>
 <body>
 <!-- Header -->

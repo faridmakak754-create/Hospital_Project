@@ -1,13 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+    
+    
+    <%@ page import="java.sql.*" %>
+
+<%
+    int patientId = Integer.parseInt(request.getParameter("patient_id"));
+
+    String url = "jdbc:mysql://localhost:3306/farid_hospital";
+    String userid = "root";
+    String password = "system";
+
+    Class.forName("com.mysql.cj.jdbc.Driver");
+    Connection con = DriverManager.getConnection(url, userid, password);
+
+    String sql = "SELECT * FROM patient_registration WHERE patient_id=?";
+    PreparedStatement pst = con.prepareStatement(sql);
+    pst.setInt(1, patientId);
+    ResultSet rs = pst.executeQuery();
+
+    rs.next();
+%>
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login</title>
-    <style>
-  body{
+<title>Edit Patient</title>
+<style>
+    body{
     margin: 0;
     padding: 0;
   }
@@ -67,21 +88,22 @@
     font-family:"poppins"
     }
 </style>
-
 </head>
 <body>
-	<%@ include file="header.jsp" %>
-    <section class="register"> 
-    <div class="form">	
-    <h2>Admin Login</h2>	
-    <form action="AdminLoginServlet" method="post">
-        <input type="tel" name="admin_phone" required placeholder="Enter Your Phone Number">
-        <input type="password" name="admin_password" required placeholder="Enter your password">
-        <input type="submit" value="Login" class="submit">
-    </form>	
-    </div>
-    </section>
-   <%@ include file="footer.jsp" %>
-    
+  <section class="register">
+     <div class="form">
+	<h2>Edit Patient Details</h2>
+
+	<form action="UpdatePatientServlet" method="post">
+    <input type="hidden" name="patient_id" value="<%= patientId %>">
+    <input type="text" name="patient_name" value="<%= rs.getString("patient_name") %>" required>
+    <input type="text" name="patient_number" value="<%= rs.getString("patient_number") %>" required>
+	<input type="submit" value="Update" class="submit">
+</form>
+
 </body>
 </html>
+
+<%
+    con.close();
+%>

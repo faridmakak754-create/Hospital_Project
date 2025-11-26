@@ -30,7 +30,7 @@ public class PatientLoginServlet extends HttpServlet
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection(url, USER, PASS);
 
-            String sql = "SELECT * FROM patient_registration WHERE patient_number=? AND patient_password=?";
+            String sql = "SELECT * FROM patient_registration WHERE patient_number=? AND patient_password=? AND status='ACTIVE'";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, number);
             pst.setString(2, password);
@@ -43,14 +43,13 @@ public class PatientLoginServlet extends HttpServlet
                 HttpSession session = request.getSession();
                 session.setAttribute("patient_id", rs.getInt("patient_id"));
                 session.setAttribute("patient_name", rs.getString("patient_name"));
-              
-
+            
                 response.sendRedirect("patient_dashboard.jsp");
                
             } 
             else
             {
-            	request.setAttribute("error", "Invalid Number or password !");
+            	request.setAttribute("error", "Invalid Number or password or block by Admin!");
                // out.println("<h3 style='color:red;'>Invalid Number or Password!</h3>");
                 RequestDispatcher rd = request.getRequestDispatcher("patient_login.jsp");
                 rd.include(request, response);
@@ -62,7 +61,7 @@ public class PatientLoginServlet extends HttpServlet
         {
             e.printStackTrace();
            // out.println("<h3 style='color:red;'>Error: " + e.getMessage() + "</h3>");
-            request.setAttribute("error", "Invalid Number or password !");
+            request.setAttribute("error", "Invalid Number or password or block by user!");
         }
     }
 }

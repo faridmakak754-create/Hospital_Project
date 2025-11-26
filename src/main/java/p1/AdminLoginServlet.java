@@ -51,7 +51,7 @@ public class AdminLoginServlet extends HttpServlet
             else
             {
             	request.setAttribute("error", "Invalid Number or password !");
-               // out.println("<h3 style='color:red;'>Invalid Number or Password!</h3>");
+               out.println("<h3 style='color:red;'>Invalid Number or Password!</h3>");
                 RequestDispatcher rd = request.getRequestDispatcher("admin_login.jsp");
                 rd.include(request, response);
             }
@@ -61,8 +61,8 @@ public class AdminLoginServlet extends HttpServlet
         catch (Exception e)
         {
             e.printStackTrace();
-           // out.println("<h3 style='color:red;'>Error: " + e.getMessage() + "</h3>");
-            request.setAttribute("error", "Invalid Number or password !");
+           out.println("<h3 style='color:red;'>Error: " + e.getMessage() + "</h3>");
+            
         }
     }
 }
