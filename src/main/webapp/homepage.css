@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 * {
     margin: 0;
     padding: 0;
@@ -17,18 +18,32 @@
 }
 
 body {
-    background-color:white;
+    background-color: white;
     color: #333;
 }
 
-.container {
+/* Global layout control */
+html, body {
+    margin: 0;
+    padding: 0;
     width: 100%;
+    overflow-x: hidden;
+}
+
+/* Apply 5px gap on left & right for every main section */
+.container,
+section,
+footer {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+/* Single container definition */
+.container {
+    width: calc(100% - 10px);
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 15px; 
-   
-   
-    
+    padding: 0;
 }
 
 a {
@@ -43,9 +58,9 @@ header {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* --- Remove all gap on left for logo --- */
+/* Header container with consistent padding */
 header .container {
-    padding-left: 0;
+    padding: 0;
 }
 
 .header-top {
@@ -55,10 +70,10 @@ header .container {
     padding: 5px 0;
 }
 
+/* Logo section - single definition */
 .logo-section {
     display: flex;
     align-items: center;
-    gap: 0;
     margin: 0;
     padding: 0;
 }
@@ -66,14 +81,14 @@ header .container {
 .logo {
     margin: 0;
     padding: 0;
-    background: none; /* No background box */
+    background: none;
     border-radius: 0;
     box-shadow: none;
 }
 
 .logo img {
     display: block;
-    width: 100px; /* adjust logo size if needed */
+    width: 100px;
     height: auto;
 }
 
@@ -83,7 +98,7 @@ header .container {
     line-height: 1.4;
     margin: 0;
     padding: 0;
-    margin-left: 8px; /* set to 0 for absolutely no gap */
+    margin-left: 8px;
 }
 
 .header-links {
@@ -641,53 +656,6 @@ footer {
     padding-top: 20px;
     border-top: 1px solid #444;
     font-size: 14px;
-}
-
-/* 🔹 Global layout control */
-html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    overflow-x: hidden;
-}
-
-/* 🔹 Apply 5px gap on left & right for every main section */
-.container,
-section,
-footer {
-    margin-left: 5px;
-    margin-right: 5px;
-}
-
-/* 🔹 Ensure container fits full width minus the 10px total gap */
-.container {
-    padding: 0;
-    width: calc(100% - 10px);
-    max-width: calc(100% - 10px);
-}
-
-/* 🔹 Logo section alignment */
-.logo-section {
-    display: flex;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-}
-
-.logo {
-    margin: 0;
-    padding: 0;
-}
-
-.logo img {
-    display: block;
-    margin: 0;
-    padding: 0;
-}
-
-/* 🔹 Small space between logo and text */
-.institute-name {
-    margin-left: 8px;
 }
 
 /* Responsive */

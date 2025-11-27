@@ -58,7 +58,7 @@
                 <li><a href="#">Departments</a></li>
                 <li><a href="#">Patient Care</a></li>
                 <li><a href="patientlogin.jsp"class="active">Appointments</a></li>
-                <li><a href="contact.html"> Contact us</a></li>
+                <li><a href="contact.jsp"> Contact us</a></li>
                 
             </ul>
         </div>
@@ -166,7 +166,7 @@
                         <li><a href="#">Departments</a></li>
                         <li><a href="#">Patient Care</a></li>
                         <li><a href="patientregister.jsp">Appointments</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="contact.jsp">Contact Us</a></li>
                         <li><a href="privacy.html">Privacy policy</a></li>
                         <li><a href="term.html">Terms & Condition</a></li>
                         <li><a href="refund.html">Refund Policy </a></li>

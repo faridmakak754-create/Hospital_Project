@@ -67,7 +67,7 @@
                 <li><a href="#">Departments</a></li>
                 <li><a href="#">Patient Care</a></li>
                 <li><a href="patientregister.jsp">Appointments</a></li>
-                <li><a href=""> Contact us</a></li>
+                <li><a href="contact.jsp"> Contact us</a></li>
                 
             </ul>
         </div>
